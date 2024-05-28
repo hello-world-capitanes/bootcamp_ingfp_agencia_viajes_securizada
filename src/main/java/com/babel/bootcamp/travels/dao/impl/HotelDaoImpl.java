@@ -39,9 +39,9 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 	public Optional<Hotel> getHotel(String name, String city) {
 		String sql = "SELECT * FROM hotels WHERE name = :name AND city = :city";
 		try {
-			Hotel h = jdbcTemplate.queryForObject(sql, Map.of("name", name, "city", city), (rs, rowNum) -> {
-				return new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"));
-			});
+			Hotel h = jdbcTemplate.queryForObject(sql, Map.of("name", name, "city", city), (rs, rowNum) ->
+				new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"))
+			);
 			return Optional.of(h);
 		}catch(EmptyResultDataAccessException e) { //No existe el hotel
 			return Optional.empty();
@@ -51,8 +51,16 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 	@Override
 	public List<Hotel> getHotelsFromCity(String city) {
 		String sql = "SELECT * FROM hotels WHERE city = :city";
-		return jdbcTemplate.query(sql, Map.of("city", city), (rs, rowNum) -> {
-			return new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"));
-		});
+		return jdbcTemplate.query(sql, Map.of("city", city), (rs, rowNum) ->
+			new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"))
+		);
+	}
+
+	@Override
+	public List<Hotel> getHotels() {
+		String sql = "SELECT * FROM hotels";
+		return jdbcTemplate.query(sql, (rs, rowNum) ->
+			new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"))
+		);
 	}
 }

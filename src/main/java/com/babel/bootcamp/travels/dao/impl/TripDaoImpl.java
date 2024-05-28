@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,9 +40,9 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 	public Optional<Trip> getTrip(String destination) {
 		String sql = "SELECT * FROM trips WHERE destination = :destination";
 		try {
-			Trip t = jdbcTemplate.queryForObject(sql, Map.of("destination", destination), (rs, rowNum) -> {
-				return new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"));
-			});
+			Trip t = jdbcTemplate.queryForObject(sql, Map.of("destination", destination), (rs, rowNum) ->
+				new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"))
+			);
 			return Optional.of(t);
 		}catch(EmptyResultDataAccessException e) {
 			return Optional.empty();
@@ -51,8 +52,16 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 	@Override
 	public Trip getRandomTrip() {
 		String sql = "SELECT * FROM trips ORDER BY RAND() LIMIT 1";
-		return jdbcTemplate.queryForObject(sql, EmptySqlParameterSource.INSTANCE, (rs, rowNum) -> {
-			return new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"));
-		});
+		return jdbcTemplate.queryForObject(sql, EmptySqlParameterSource.INSTANCE, (rs, rowNum) ->
+			new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"))
+		);
+	}
+
+	@Override
+	public List<Trip> getTrips() {
+		String sql = "SELECT * FROM trips";
+		return jdbcTemplate.query(sql, (rs, rowNum) ->
+			new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"))
+		);
 	}
 }

@@ -15,4 +15,6 @@ public interface HotelDao {
 	Optional<Hotel> getHotel(String name, String city);
 
 	List<Hotel> getHotelsFromCity(String city);
+
+	List<Hotel> getHotels();
 }
