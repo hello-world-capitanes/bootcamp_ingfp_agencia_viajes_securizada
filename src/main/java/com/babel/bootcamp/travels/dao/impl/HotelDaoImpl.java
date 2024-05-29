@@ -26,7 +26,7 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 	@Override
 	public void deleteHotel(String name, String city) {
 		String sql = "DELETE FROM HOTEL WHERE name = :name AND city = :city";
-		jdbcTemplate.update(sql, Map.of("name", name));
+		jdbcTemplate.update(sql, Map.of("name", name, "city", city));
 	}
 
 	@Override
