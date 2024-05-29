@@ -1,6 +1,6 @@
-package com.babel.bootcamp.travels.controllers.free.admin.impl;
+package com.babel.bootcamp.travels.controllers.admin.impl;
 
-import com.babel.bootcamp.travels.controllers.free.admin.HotelController;
+import com.babel.bootcamp.travels.controllers.admin.HotelController;
 import com.babel.bootcamp.travels.model.Hotel;
 import com.babel.bootcamp.travels.services.HotelService;
 import org.springframework.http.HttpStatus;

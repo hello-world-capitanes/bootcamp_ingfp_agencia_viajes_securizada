@@ -1,6 +1,6 @@
-package com.babel.bootcamp.travels.controllers.free.admin.impl;
+package com.babel.bootcamp.travels.controllers.admin.impl;
 
-import com.babel.bootcamp.travels.controllers.free.admin.UserController;
+import com.babel.bootcamp.travels.controllers.admin.UserController;
 import com.babel.bootcamp.travels.model.Credentials;
 import com.babel.bootcamp.travels.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,6 @@
-package com.babel.bootcamp.travels.controllers.free.admin.impl;
+package com.babel.bootcamp.travels.controllers.admin.impl;
 
-import com.babel.bootcamp.travels.controllers.free.admin.TripController;
+import com.babel.bootcamp.travels.controllers.admin.TripController;
 import com.babel.bootcamp.travels.model.Trip;
 import com.babel.bootcamp.travels.services.NotFoundException;
 import com.babel.bootcamp.travels.services.TripService;

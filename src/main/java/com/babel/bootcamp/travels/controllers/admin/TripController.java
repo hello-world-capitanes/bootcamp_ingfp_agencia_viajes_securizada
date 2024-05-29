@@ -1,4 +1,4 @@
-package com.babel.bootcamp.travels.controllers.free.admin;
+package com.babel.bootcamp.travels.controllers.admin;
 
 import com.babel.bootcamp.travels.model.Trip;
 
