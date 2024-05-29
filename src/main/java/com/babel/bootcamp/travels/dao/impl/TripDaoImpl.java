@@ -20,25 +20,25 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 
 	@Override
 	public void addTrip(Trip trip) {
-		String sql = "INSERT INTO trips (destination, duration, basePrice) VALUES (:destination, :duration, :basePrice)";
+		String sql = "INSERT INTO TRIP (destination, duration, basePrice) VALUES (:destination, :duration, :basePrice)";
 		jdbcTemplate.update(sql, Map.of("destination", trip.getDestination(), "duration", trip.getDuration(), "basePrice", trip.getBasePrice()));
 	}
 
 	@Override
 	public void deleteTrip(String destination) {
-		String sql = "DELETE FROM trips WHERE destination = :destination";
+		String sql = "DELETE FROM TRIP WHERE destination = :destination";
 		jdbcTemplate.update(sql, Map.of("destination", destination));
 	}
 
 	@Override
 	public void updateTrip(Trip trip) {
-		String sql = "UPDATE trips SET duration = :duration, basePrice = :basePrice WHERE destination = :destination";
+		String sql = "UPDATE TRIP SET duration = :duration, basePrice = :basePrice WHERE destination = :destination";
 		jdbcTemplate.update(sql, Map.of("destination", trip.getDestination(), "duration", trip.getDuration(), "basePrice", trip.getBasePrice()));
 	}
 
 	@Override
 	public Optional<Trip> getTrip(String destination) {
-		String sql = "SELECT * FROM trips WHERE destination = :destination";
+		String sql = "SELECT destination, duration, basePrice FROM TRIP WHERE destination = :destination";
 		try {
 			Trip t = jdbcTemplate.queryForObject(sql, Map.of("destination", destination), (rs, rowNum) ->
 				new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"))
@@ -51,7 +51,7 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 
 	@Override
 	public Trip getRandomTrip() {
-		String sql = "SELECT * FROM trips ORDER BY RAND() LIMIT 1";
+		String sql = "SELECT destination, duration, basePrice FROM TRIP ORDER BY dbms_random.value() FETCH FIRST ROW ONLY";
 		return jdbcTemplate.queryForObject(sql, EmptySqlParameterSource.INSTANCE, (rs, rowNum) ->
 			new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"))
 		);
@@ -59,7 +59,7 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 
 	@Override
 	public List<Trip> getTrips() {
-		String sql = "SELECT * FROM trips";
+		String sql = "SELECT destination, duration, basePrice FROM TRIP";
 		return jdbcTemplate.query(sql, (rs, rowNum) ->
 			new Trip(rs.getString("destination"), rs.getInt("duration"), rs.getInt("basePrice"))
 		);

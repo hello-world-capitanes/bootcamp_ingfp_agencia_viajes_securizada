@@ -19,25 +19,25 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 
 	@Override
 	public void addHotel(Hotel hotel) {
-		String sql = "INSERT INTO hotels (name, city, stars) VALUES (:name, :city, :stars)";
+		String sql = "INSERT INTO HOTEL (name, city, stars) VALUES (:name, :city, :stars)";
 		jdbcTemplate.update(sql, Map.of("name", hotel.getName(), "city", hotel.getCity(), "stars", hotel.getStars()));
 	}
 
 	@Override
 	public void deleteHotel(String name, String city) {
-		String sql = "DELETE FROM hotels WHERE name = :name AND city = :city";
+		String sql = "DELETE FROM HOTEL WHERE name = :name AND city = :city";
 		jdbcTemplate.update(sql, Map.of("name", name));
 	}
 
 	@Override
 	public void updateHotel(Hotel hotel) {
-		String sql = "UPDATE hotels SET stars = :stars WHERE name = :name AND city = :city";
+		String sql = "UPDATE HOTEL SET stars = :stars WHERE name = :name AND city = :city";
 		jdbcTemplate.update(sql, Map.of("name", hotel.getName(), "city", hotel.getCity(), "stars", hotel.getStars()));
 	}
 
 	@Override
 	public Optional<Hotel> getHotel(String name, String city) {
-		String sql = "SELECT * FROM hotels WHERE name = :name AND city = :city";
+		String sql = "SELECT name, city, stars FROM HOTEL WHERE name = :name AND city = :city";
 		try {
 			Hotel h = jdbcTemplate.queryForObject(sql, Map.of("name", name, "city", city), (rs, rowNum) ->
 				new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"))
@@ -50,7 +50,7 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 
 	@Override
 	public List<Hotel> getHotelsFromCity(String city) {
-		String sql = "SELECT * FROM hotels WHERE city = :city";
+		String sql = "SELECT name, city, stars FROM HOTEL WHERE city = :city";
 		return jdbcTemplate.query(sql, Map.of("city", city), (rs, rowNum) ->
 			new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"))
 		);
@@ -58,7 +58,7 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 
 	@Override
 	public List<Hotel> getHotels() {
-		String sql = "SELECT * FROM hotels";
+		String sql = "SELECT name, city, stars FROM HOTEL";
 		return jdbcTemplate.query(sql, (rs, rowNum) ->
 			new Hotel(rs.getString("name"), rs.getString("city"), rs.getInt("stars"))
 		);
