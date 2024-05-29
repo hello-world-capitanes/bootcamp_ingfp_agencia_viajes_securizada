@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TripDao {
-	void addTrip(String destination, int duration, int basePrice);
+	void addTrip(Trip trip);
 
 	void deleteTrip(String destination);
 
-	void updateTrip(String destination, int duration, int basePrice);
+	void updateTrip(Trip trip);
 
 	Optional<Trip> getTrip(String destination);
 

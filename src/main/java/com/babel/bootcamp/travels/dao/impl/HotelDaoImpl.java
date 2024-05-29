@@ -18,9 +18,9 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 	}
 
 	@Override
-	public void addHotel(String name, String city, int stars) {
+	public void addHotel(Hotel hotel) {
 		String sql = "INSERT INTO hotels (name, city, stars) VALUES (:name, :city, :stars)";
-		jdbcTemplate.update(sql, Map.of("name", name, "city", city, "stars", stars));
+		jdbcTemplate.update(sql, Map.of("name", hotel.getName(), "city", hotel.getCity(), "stars", hotel.getStars()));
 	}
 
 	@Override
@@ -30,9 +30,9 @@ public class HotelDaoImpl implements com.babel.bootcamp.travels.dao.HotelDao {
 	}
 
 	@Override
-	public void updateHotel(String name, String city, int stars) {
+	public void updateHotel(Hotel hotel) {
 		String sql = "UPDATE hotels SET stars = :stars WHERE name = :name AND city = :city";
-		jdbcTemplate.update(sql, Map.of("name", name, "city", city, "stars", stars));
+		jdbcTemplate.update(sql, Map.of("name", hotel.getName(), "city", hotel.getCity(), "stars", hotel.getStars()));
 	}
 
 	@Override

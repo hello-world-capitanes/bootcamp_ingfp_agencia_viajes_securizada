@@ -19,9 +19,9 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 	}
 
 	@Override
-	public void addTrip(String destination, int duration, int basePrice) {
+	public void addTrip(Trip trip) {
 		String sql = "INSERT INTO trips (destination, duration, basePrice) VALUES (:destination, :duration, :basePrice)";
-		jdbcTemplate.update(sql, Map.of("destination", destination, "duration", duration, "basePrice", basePrice));
+		jdbcTemplate.update(sql, Map.of("destination", trip.getDestination(), "duration", trip.getDuration(), "basePrice", trip.getBasePrice()));
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public class TripDaoImpl implements com.babel.bootcamp.travels.dao.TripDao {
 	}
 
 	@Override
-	public void updateTrip(String destination, int duration, int basePrice) {
+	public void updateTrip(Trip trip) {
 		String sql = "UPDATE trips SET duration = :duration, basePrice = :basePrice WHERE destination = :destination";
-		jdbcTemplate.update(sql, Map.of("destination", destination, "duration", duration, "basePrice", basePrice));
+		jdbcTemplate.update(sql, Map.of("destination", trip.getDestination(), "duration", trip.getDuration(), "basePrice", trip.getBasePrice()));
 	}
 
 	@Override
