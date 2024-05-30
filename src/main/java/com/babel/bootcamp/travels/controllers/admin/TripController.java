@@ -1,20 +1,18 @@
-package com.babel.bootcamp.travels.dao;
+package com.babel.bootcamp.travels.controllers.admin;
 
 import com.babel.bootcamp.travels.model.Trip;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface TripDao {
+public interface TripController {
 	void addTrip(Trip trip);
 
 	void deleteTrip(String destination);
 
-	void updateTrip(Trip trip);
+	void updateTrip(String destination, Trip trip);
 
-	Optional<Trip> getTrip(String destination);
-
-	Trip getRandomTrip();
+	Trip getTrip(String destination);
 
 	List<Trip> getTrips();
 }
